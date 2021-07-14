@@ -34,6 +34,24 @@ define([], function() {
     "NoMessages": "You have no upcoming meetings",    
     "RefreshInterval": "How often to check for new upcoming meetings (in minutes)",
     "PropertyPaneDescription": "Meetings web part configuration",
-    "ViewAll": "See all"
+    "ViewAll": "See all",
+    "Error": "An error occurred",
+
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday",
+
+    "MondayAbbr": "Mon",
+    "TuesdayAbbr": "Tue",
+    "WednesdayAbbr": "Wed",
+    "ThursdayAbbr": "Thur",
+    "FridayAbbr": "Fri",
+    "SaturdayAbbr": "Sat",
+    "SundayAbbr": "Sun"
+
   }
 });

@@ -168,24 +168,44 @@ export default class MyCalendar extends React.Component<IMyCalendarProps, IMyCal
     return text;
   }
 
-  private _getDayOfWeek = (date: Date): string => {    
-    switch (date.getDay()) {
-      case 0:
-        return "Sunday";
-      case 1:
-        return "Monday";
-      case 2:
-        return "Tuesday";
-      case 3:
-        return "Wednesday";
-      case 4:
-        return "Thursday";
-      case 5:
-        return "Friday";
-      case 6:
-        return "Saturday";      
+  private _getDayOfWeek = (date: Date, abbreviated: boolean = false): string => {    
+    if (abbreviated) {
+      switch (date.getDay()) {
+        case 0:
+          return strings.SundayAbbr;
+        case 1:
+          return strings.MondayAbbr;
+        case 2:
+          return strings.TuesdayAbbr;
+        case 3:
+          return strings.WednesdayAbbr;
+        case 4:
+          return strings.ThursdayAbbr;
+        case 5:
+          return strings.FridayAbbr;
+        case 6:
+          return strings.SaturdayAbbr;      
+      }
     }
-    return "ERROR";
+    else {
+      switch (date.getDay()) {
+        case 0:
+          return strings.Sunday;
+        case 1:
+          return strings.Monday;
+        case 2:
+          return strings.Tuesday;
+        case 3:
+          return strings.Wednesday;
+        case 4:
+          return strings.Thursday;
+        case 5:
+          return strings.Friday;
+        case 6:
+          return strings.Saturday;      
+      }
+    }
+    return strings.Error;
   }
 
   private _didDateChange = (startDate: Date, index: number): boolean => {
@@ -332,12 +352,12 @@ export default class MyCalendar extends React.Component<IMyCalendarProps, IMyCal
 
   private _getEventDetails = (messageId: string): Promise<Event> => {
     return new Promise<Event>((resolve, reject) => {
-      this._getTimeZone().then(timeZone => {
+      //this._getTimeZone().then(timeZone => {
         this.props.graphClient
           // get the mailbox settings
           .api(`me/calendar/events/` + messageId)
           .version("v1.0")
-          .header("Prefer", "outlook.timezone=" + '"' + timeZone + '"')
+          //.header("Prefer", "outlook.timezone=" + '"' + timeZone + '"')
           .get((err: any, res: Event): void => {
             if (err) {
               console.log("error:" + err);
@@ -346,7 +366,7 @@ export default class MyCalendar extends React.Component<IMyCalendarProps, IMyCal
             resolve(res);
           });
       });
-    });
+    //});
   }
 
 
@@ -418,7 +438,7 @@ export default class MyCalendar extends React.Component<IMyCalendarProps, IMyCal
                 ariaLabel="Use left and right arrow keys to navigate between commands"
               />
               <Text>
-                {new Date(this.state.activeEvent.start.dateTime).toLocaleString()} - {new Date(this.state.activeEvent.end.dateTime).toLocaleTimeString()}
+                {this._getTimeText(new Date(this.state.activeEvent.start.dateTime + 'Z'))} - {this._getTimeText(new Date(this.state.activeEvent.end.dateTime + 'Z'))}
               </Text>
               {(this.state.activeEvent.body.contentType === "html") ?
                 <div dangerouslySetInnerHTML={{ __html: this.state.activeEvent.body.content }}></div> :

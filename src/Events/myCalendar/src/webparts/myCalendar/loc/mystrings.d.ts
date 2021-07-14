@@ -28,6 +28,23 @@ declare interface IMyCalendarWebPartStrings {
   NewMeeting: string;
   NoMeetings: string;    
   ViewAll: string;
+  Error: string;
+
+  Monday: string;
+  Tuesday: string;
+  Wednesday: string;
+  Thursday: string;
+  Friday: string;
+  Saturday: string;
+  Sunday: string;
+
+  MondayAbbr: string;
+  TuesdayAbbr: string;
+  WednesdayAbbr: string;
+  ThursdayAbbr: string;
+  FridayAbbr: string;
+  SaturdayAbbr: string;
+  SundayAbbr: string;
 }
 
 declare module 'MyCalendarWebPartStrings' {
